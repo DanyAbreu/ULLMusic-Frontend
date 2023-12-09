@@ -1,1 +1,9 @@
 /* You can add global styles to this file, and also import other style files */
+
+/* Validaciones de Datos */
+.ng-valid:not(form).ng-touched{
+    border-left: 5px solid #5ae737; /*Datos validos: verde*/
+}
+.ng-invalid:not(form).ng-touched{
+    border-left: 5px solid #e73737; /*Datos erroneos: rojo*/
+}
