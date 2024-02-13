@@ -10,6 +10,9 @@ import { RegisterComponent } from './component/auth/register/register.component'
 import { AppRoutingModule } from './route/app-routing.module';
 import { ReactiveFormsModule } from '@angular/forms';
 import { HttpClientModule } from '@angular/common/http';
+// import loadScripts
+import { LoadScriptsService } from './servicies/load-scripts.service';
+import { ArtistComponent } from './artist/artist.component';
 
 @NgModule({
   declarations: [
@@ -19,6 +22,7 @@ import { HttpClientModule } from '@angular/common/http';
     NewsComponent,
     LoginComponent,
     RegisterComponent,
+    ArtistComponent,
   ],
   imports: [
     BrowserModule,
@@ -26,7 +30,9 @@ import { HttpClientModule } from '@angular/common/http';
     ReactiveFormsModule,
     HttpClientModule
   ],
-  providers: [],
+  providers: [
+    LoadScriptsService
+  ],
   bootstrap: [AppComponent]
 })
 export class AppModule { }
