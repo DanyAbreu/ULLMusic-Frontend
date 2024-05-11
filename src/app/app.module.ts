@@ -10,8 +10,6 @@ import { RegisterComponent } from './component/auth/register/register.component'
 import { AppRoutingModule } from './route/app-routing.module';
 import { ReactiveFormsModule } from '@angular/forms';
 import { HttpClientModule } from '@angular/common/http';
-// import loadScripts
-import { LoadScriptsService } from './servicies/load-scripts.service';
 import { AlbumComponent } from './component/album/album.component';
 
 @NgModule({
@@ -29,9 +27,6 @@ import { AlbumComponent } from './component/album/album.component';
     AppRoutingModule,
     ReactiveFormsModule,
     HttpClientModule
-  ],
-  providers: [
-    LoadScriptsService
   ],
   bootstrap: [AppComponent]
 })

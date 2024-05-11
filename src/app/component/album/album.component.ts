@@ -1,6 +1,5 @@
 import { Component } from '@angular/core';
-import { LoadScriptsService } from 'src/app/servicies/load-scripts.service';
-
+import axios from "axios";
 
 @Component({
   selector: 'app-album',
@@ -8,9 +7,11 @@ import { LoadScriptsService } from 'src/app/servicies/load-scripts.service';
   styleUrls: ['./album.component.css']
 })
 export class AlbumComponent {
-  constructor( private _loadScripts:LoadScriptsService ){
-    /* console.log("SE INICIA EL CONSTRUCTOR") */
-    _loadScripts.load(["album"]);
-  }
+  constructor(){}
 
+  //----------------------------------------------------------------//
+
+  ngOnInit(/* id del album */): void{
+    
+  }
 }
