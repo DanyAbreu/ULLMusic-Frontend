@@ -10,7 +10,7 @@ const routes: Routes = [
   { path: 'inicio', component: NewsComponent },
   { path: 'login', component: LoginComponent },
   { path: 'register', component: RegisterComponent },
-  { path: 'album', component: AlbumComponent }
+  { path: 'album/:idAlb', component: AlbumComponent }
 ];
 
 @NgModule({

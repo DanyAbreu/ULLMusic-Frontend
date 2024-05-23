@@ -1,5 +1,7 @@
 import { Component } from '@angular/core';
 import axios from "axios";
+import { ActivatedRoute } from '@angular/router';
+import { DataService } from 'src/app/servicies/back/data.service';
 
 @Component({
   selector: 'app-album',
@@ -7,11 +9,34 @@ import axios from "axios";
   styleUrls: ['./album.component.css']
 })
 export class AlbumComponent {
-  constructor(){}
+
+  idAlb!: string;
+  constructor(private route: ActivatedRoute, private DataService: DataService){}
+  album!: {
+    idAlb: string;
+    artists: [{
+      idArt: string;
+      nameArt: string;
+    }];
+    nameAlb: string;
+    imageAlbUrl: string;
+    genresAlb: string;
+    popularityAlb: number;
+    releaseDate: Date;
+  };
 
   //----------------------------------------------------------------//
 
-  ngOnInit(/* id del album */): void{
-    
+  ngOnInit(): void{
+    this.route.params.subscribe(params => {
+      this.idAlb = params['idAlb'];
+      if (this.idAlb) {
+        this.DataService.getAlbum(this.idAlb).subscribe(
+          (data) => {
+            this.album = data;
+          }
+        );
+      }
+    });
   }
 }

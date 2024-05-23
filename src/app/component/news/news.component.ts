@@ -1,40 +1,39 @@
-import { Component } from '@angular/core';
+import { Component, Renderer2 } from '@angular/core';
 import { DataService } from "src/app/servicies/back/data.service";
-
+import { Router } from '@angular/router';
 @Component({
   selector: 'app-news',
   templateUrl: './news.component.html',
   styleUrls: ['./news.component.css']
 })
+
 export class NewsComponent {
 
-  constructor(private DataService: DataService){}
+  constructor(private DataService: DataService, private router: Router, private renderer: Renderer2){}
 
- 
+  albums!: [{ 
+    idAlb: string; 
+    imageAlbUrl: string; 
+    nameAlb: string; 
+    artists: [any]; }];
+
+  // Metodo para navegar al componente Album
+  navAlbum (idAlb:string){
+    this.router.navigate(['/album/',idAlb])
+  }
+
+ // Función principal: pide datos al back sobre nuevos lanzamientos
   ngOnInit(): void{
     this.DataService.newReleases().subscribe(
       (data) => {
-        data.forEach( (album: { idAlb: string; imageAlbUrl: string; nameAlb: string; artists: any; }) => {
-          let artistStr = "";
-          album.artists.forEach( (artist: { nameArt: String;}) => {
-            console.log(artist)
-            artistStr += artist.nameArt + ". "
-          });
-          (<HTMLInputElement>document.getElementById("news")).innerHTML += `
-          <div class="col">
-            <a href="/album">
-              <div id="${album.idAlb}" class="card bg-dark text-white" style="width: 18rem; margin: 5px;">
-                <img src="${album.imageAlbUrl}" class="card-img-top">
-                <div class="card-body">
-                  <h5 class="card-title">${album.nameAlb}</h5>
-                  <p>Artistas: ${artistStr}</p>
-                </div>
-              </div>
-            </a>
-          </div>
-          `
+        data.forEach( (album: { idAlb: string; imageAlbUrl: string; nameAlb: string; artists: [any]; }) => {
+          if (this.albums) {
+            this.albums.push(album);
+          }else{
+            this.albums = [album];
+          }
+          
         });
-        
       },
       (error) => {
         console.error('Error al obtener nuevos albunes', error);

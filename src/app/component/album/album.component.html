@@ -1,8 +1,17 @@
-<div class="container text-center">  
-    <h1 style="margin: 25px;">Album</h1>
-    <div id="album" class="row align-items-center">
-  
-    <!-- Info del album -->
-  
+<div class="container">
+    <div class="row" style="background-color: lightgrey;">
+        <img src={{this.album.imageAlbUrl}} class="col-6">
+        <div id="album" class="col">
+
+            <h1 class="col" style="margin: 25px;">{{this.album.nameAlb}}</h1>
+            <div class="row">
+                <h4 *ngIf="this.album.artists.length == 1" class="col-2">Artista:</h4> 
+                <h4 *ngIf="this.album.artists.length >  1" class="col-2">Artistas:</h4>
+                <div *ngFor="let artist of this.album.artists">
+                    <p class="col">{{artist.nameArt}}</p>
+                </div>
+                <p class="col-12">Fecha de lanzamiento: {{this.album.releaseDate}}</p>
+            </div>
+        </div>
     </div>
 </div>
