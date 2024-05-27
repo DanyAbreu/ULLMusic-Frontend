@@ -1,6 +1,6 @@
 import { NgModule } from '@angular/core';
 import { BrowserModule } from '@angular/platform-browser';
-
+import { CommonModule } from '@angular/common';
 import { AppComponent } from './app.component';
 import { NavbarComponent } from './component/shared/navbar/navbar.component';
 import { FooterComponent } from './component/shared/footer/footer.component';
@@ -26,7 +26,8 @@ import { AlbumComponent } from './component/album/album.component';
     BrowserModule,
     AppRoutingModule,
     ReactiveFormsModule,
-    HttpClientModule
+    HttpClientModule,
+    CommonModule 
   ],
   bootstrap: [AppComponent]
 })

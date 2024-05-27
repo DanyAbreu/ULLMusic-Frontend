@@ -15,14 +15,20 @@ export class AlbumComponent {
   album!: {
     idAlb: string;
     artists: [{
-      idArt: string;
-      nameArt: string;
+    idArt: string;
+    nameArt: string;
     }];
     nameAlb: string;
     imageAlbUrl: string;
     genresAlb: string;
     popularityAlb: number;
     releaseDate: Date;
+    tracks: [{
+      idTrack: string;
+      nameTrack: string;
+      previewUrl: string;
+      duration: Number;
+    }];
   };
 
   //----------------------------------------------------------------//
