@@ -19,4 +19,8 @@ export class DataService {
   getAlbum(idAlb:string): Observable<any> {
     return this.http.get<any>(environment.API_URL+"album/"+idAlb);
   }
+
+  getArtist(idArt:string): Observable<any> {
+    return this.http.get<any>(environment.API_URL+"artist/"+idArt)
+  }
 }

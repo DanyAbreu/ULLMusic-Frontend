@@ -4,28 +4,16 @@
   
   <div class="row align-items-center" >
     <div *ngFor = "let album of albums" class="col">
-      <div class="card bg-dark text-white" style="width: 18rem; margin: 5px;" (click)="navAlbum(album.idAlb)">
-        <img src={{album.imageAlbUrl}} class="card-img-top">
+      <div class="card bg-dark text-white" style="width: 18rem; margin: 5px;" >
+        <img src={{album.imageAlbUrl}} class="card-img-top" (click)="navAlbum(album.idAlb)">
         <div class="card-body">
-          <h5 class="card-title">{{album.nameAlb}}</h5>
+          <h5 class="card-title" (click)="navAlbum(album.idAlb)">{{album.nameAlb}}</h5>
           <h6>Artistas:</h6>
           <div *ngFor = "let artist of album.artists">
-            <p>{{artist.nameArt}}</p>
+            <p (click)="navArtist(artist.idArt)"> {{artist.nameArt}} </p>
           </div>
         </div>
       </div>
     </div>
   </div>
 </div>
-
-<!-- 
-  <div class="col" id="${album.idAlb}">
-              <div class="card bg-dark text-white" style="width: 18rem; margin: 5px;">
-                <img src="${album.imageAlbUrl}" class="card-img-top">
-                <div class="card-body">
-                  <h5 class="card-title">${album.nameAlb}</h5>
-                  <p>Artistas: ${artistStr}</p>
-                </div>
-              </div>
-            </div>
- -->

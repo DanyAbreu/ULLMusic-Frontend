@@ -19,7 +19,11 @@ export class NewsComponent {
 
   // Metodo para navegar al componente Album
   navAlbum (idAlb:string){
-    this.router.navigate(['/album/',idAlb])
+    this.router.navigate(['/album/',idAlb]);
+  }
+
+  navArtist (idArt:string){
+    this.router.navigate(['/artist/',idArt]);
   }
 
  // Función principal: pide datos al back sobre nuevos lanzamientos

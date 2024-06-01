@@ -11,6 +11,7 @@ import { AppRoutingModule } from './route/app-routing.module';
 import { ReactiveFormsModule } from '@angular/forms';
 import { HttpClientModule } from '@angular/common/http';
 import { AlbumComponent } from './component/album/album.component';
+import { ArtistComponent } from './component/artist/artist.component';
 
 @NgModule({
   declarations: [
@@ -20,7 +21,8 @@ import { AlbumComponent } from './component/album/album.component';
     NewsComponent,
     LoginComponent,
     RegisterComponent,
-    AlbumComponent
+    AlbumComponent,
+    ArtistComponent
   ],
   imports: [
     BrowserModule,

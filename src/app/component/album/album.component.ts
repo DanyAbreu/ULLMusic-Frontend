@@ -1,7 +1,8 @@
 import { Component } from '@angular/core';
-import axios from "axios";
-import { ActivatedRoute } from '@angular/router';
 import { DataService } from 'src/app/servicies/back/data.service';
+import { ActivatedRoute } from '@angular/router';
+import { Router } from '@angular/router';
+
 
 @Component({
   selector: 'app-album',
@@ -11,7 +12,7 @@ import { DataService } from 'src/app/servicies/back/data.service';
 export class AlbumComponent {
 
   idAlb!: string;
-  constructor(private route: ActivatedRoute, private DataService: DataService){}
+  constructor(private router: Router, private route: ActivatedRoute, private DataService: DataService){}
   album!: {
     idAlb: string;
     artists: [{
@@ -31,6 +32,10 @@ export class AlbumComponent {
     }];
   };
 
+  navArtist (idArt:string){
+    this.router.navigate(['/artist/',idArt]);
+  }
+  
   //----------------------------------------------------------------//
 
   ngOnInit(): void{

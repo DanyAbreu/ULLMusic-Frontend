@@ -1,0 +1,32 @@
+<div class="container" style="flex: 1;">
+    <div class="row" style="background-color: lightgrey;">
+        <img src={{this.artist.imageArtUrl}} class="col-6">
+        <div class="col">
+            <h1 class="col" style="margin: 25px;">{{this.artist.nameArt}}</h1>
+            <div class="row">
+                <div *ngIf="this.artist.genresArt != '' ">
+                    <h4 class="col-3">Generos:</h4>
+                    <p class="col-3">{{this.artist.genresArt}}</p>
+                </div>
+            </div>
+            <div class="row">
+                <h4 class="col-3"> Seguidores: </h4>
+                <p class="col-2">{{this.artist.followers}}</p>
+            </div>
+        </div>
+        <div id="content" class="row-12">
+            <!-- Biografía del artista -->
+        </div>
+    </div>
+    <div class="row align-items-center">
+        <h2 class="col-12">Albumes</h2>
+        <div *ngFor="let album of artist.albums" class="col">
+            <div class="card bg-dark text-white" style="width: 18rem; margin: 5px;" >
+                <img src="{{album.imageAlbUrl}}" class="card-img-top" (click)="navAlbum(album.idAlb)">
+                <div class="card-body">
+                    <h5 class="card-title" (click)="navAlbum(album.idAlb)"> {{album.nameAlb}} </h5>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
