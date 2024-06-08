@@ -12,6 +12,7 @@ import { ReactiveFormsModule } from '@angular/forms';
 import { HttpClientModule } from '@angular/common/http';
 import { AlbumComponent } from './component/album/album.component';
 import { ArtistComponent } from './component/artist/artist.component';
+import { SearchComponent } from './component/search/search.component';
 
 @NgModule({
   declarations: [
@@ -22,7 +23,8 @@ import { ArtistComponent } from './component/artist/artist.component';
     LoginComponent,
     RegisterComponent,
     AlbumComponent,
-    ArtistComponent
+    ArtistComponent,
+    SearchComponent
   ],
   imports: [
     BrowserModule,

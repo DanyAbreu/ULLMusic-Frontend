@@ -28,17 +28,14 @@ export class ArtistComponent {
             this.artist = data;
 
             const contentDiv = document.getElementById('content');
+            console.log(contentDiv);
             if (contentDiv) {
-              console.log("EL CONTENIDO ES: "+data.content)
-              contentDiv.innerHTML = data.content;
+              contentDiv.innerHTML = this.artist.content;
             }
           }
         )
       }
     });
-/* 
-    
-     */
   }
 
 }

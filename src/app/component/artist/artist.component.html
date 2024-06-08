@@ -14,7 +14,10 @@
                 <p class="col-2">{{this.artist.followers}}</p>
             </div>
         </div>
-        <div id="content" class="row-12">
+        <div class="col-12" *ngIf="this.artist.content">
+            <h4>Biografía</h4>
+        </div>
+        <div id="content" class="col-12">
             <!-- Biografía del artista -->
         </div>
     </div>

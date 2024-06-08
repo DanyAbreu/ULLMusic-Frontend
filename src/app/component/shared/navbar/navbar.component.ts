@@ -1,5 +1,6 @@
 import { Component, OnDestroy, OnInit } from '@angular/core';
 import { AuthService } from 'src/app/servicies/auth/auth.service';
+import { Router } from '@angular/router';
 // import { User } from 'src/app/servicies/auth/user';
 
 @Component({
@@ -10,7 +11,11 @@ import { AuthService } from 'src/app/servicies/auth/auth.service';
 export class NavbarComponent implements OnInit, OnDestroy{
   userLoginOn:boolean = false
   // userData?:User
-  constructor(private AuthService:AuthService){}
+  constructor( private router: Router, private AuthService:AuthService){}
+
+  navSearch(strSearch: any){
+    this.router.navigate(['/search/',strSearch]);
+  }
 
   ngOnDestroy(): void {
     this.AuthService.currentUserData.unsubscribe()
@@ -23,6 +28,8 @@ export class NavbarComponent implements OnInit, OnDestroy{
         this.userLoginOn = userLoginOn
       }
     })
+
+    
 
     // this.AuthService.currentUserData.subscribe({
     //   next:(userData)=>{

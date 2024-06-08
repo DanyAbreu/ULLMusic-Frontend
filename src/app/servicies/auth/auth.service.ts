@@ -26,7 +26,7 @@ export class AuthService {
 
   //metodo para comunicarse con el backend
   login(credentials:LoginRequest):Observable<UserResponse>{
-    return this.http.post<UserResponse>(environment.API_URL+'auth/login',credentials).pipe(
+    return this.http.post<UserResponse>(environment.BACK_URL+'auth/login',credentials).pipe(
       tap( (userData: UserResponse) => {
         this.currentUserData.next(userData)
         this.currentUserLoginOn.next(true)
@@ -39,7 +39,7 @@ export class AuthService {
   }
 
   register(credentials:RegisterRequest):Observable<UserResponse>{
-    return this.http.post<UserResponse>(environment.API_URL+'auth/register',credentials).pipe(
+    return this.http.post<UserResponse>(environment.BACK_URL+'auth/register',credentials).pipe(
       tap( (userData: UserResponse) => {
         this.currentUserData.next(userData)
         this.currentUserLoginOn.next(true)

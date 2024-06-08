@@ -13,14 +13,18 @@ export class DataService {
   constructor(private http: HttpClient) { }
 
   newReleases(): Observable<any> {
-    return this.http.get<any>(environment.API_URL+"news");
+    return this.http.get<any>(environment.BACK_URL+"news");
   }
 
   getAlbum(idAlb:string): Observable<any> {
-    return this.http.get<any>(environment.API_URL+"album/"+idAlb);
+    return this.http.get<any>(environment.BACK_URL+"album/"+idAlb);
   }
 
   getArtist(idArt:string): Observable<any> {
-    return this.http.get<any>(environment.API_URL+"artist/"+idArt)
+    return this.http.get<any>(environment.BACK_URL+"artist/"+idArt);
+  }
+
+  getSearch(strSearch:string): Observable<any> {
+    return this.http.get<any>(environment.BACK_URL+"search/"+strSearch);
   }
 }

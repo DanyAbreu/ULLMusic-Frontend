@@ -1,0 +1,48 @@
+<div class="container">
+<!-- If (no hay resultados) -->
+<h1 *ngIf="this.search.artists.length == 0 && this.search.albums.length == 0 && this.search.tracks.length == 0 else notEmpty">
+    No se encontraron resultados para "{{this.strSearch}}"
+</h1>
+<!-- else -->
+<ng-template #notEmpty>
+    <h1 class="row">Resultados de busqueda para "{{this.strSearch}}"</h1>
+    <!-- ARTISTS -->
+    <div class="row" *ngIf="this.search.artists.length != 0">
+        <h2 class="col-12">Artistas:</h2>
+        <div *ngFor="let artist of this.search.artists" class="col">
+            <div class="card bg-dark text-white" style="width: 18rem; margin: 5px;" > 
+                <img src="{{artist.imageArtUrl}}" class="card-img-top" (click)="navArtist(artist.idArt)">
+                <div class="card-body">
+                    <h5 class="card-title" (click)="navArtist(artist.idArt)"> {{artist.nameArt}} </h5>
+                </div>
+            </div>
+        </div>
+    </div>
+    <!-- ALBUMS -->
+    <div class="row" *ngIf="this.search.artists.length != 0">
+        <h2 class="col-12">Albumes:</h2>
+        <div *ngFor="let album of this.search.albums" class="col">
+            <div class="card bg-dark text-white" style="width: 18rem; margin: 5px;" > 
+                <img src="{{album.imageAlbUrl}}" class="card-img-top" (click)="navArtist(album.idAlb)">
+                <div class="card-body">
+                    <h5 class="card-title" (click)="navAlbum(album.idAlb)"> {{album.nameAlb}} </h5>
+                </div>
+            </div>
+        </div>
+    </div>
+    <!-- TRACKS -->
+<!-- 
+    <div class="row" *ngIf="this.search.artists.length != 0">
+        <h2 class="col-12">Canciones:</h2>
+        <div *ngFor="let track of this.search.tracks" class="col">
+            <div class="card bg-dark text-white" style="width: 18rem; margin: 5px;" > 
+                <img src="{{track.imageAlbUrl}}" class="card-img-top">
+                <div class="card-body">
+                    <h5 class="card-title"> {{track.nameAlb}} </h5>
+                </div>
+            </div>
+        </div>
+    </div>
+     -->
+</ng-template>
+</div>
