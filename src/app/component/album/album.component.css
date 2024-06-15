@@ -1,0 +1,16 @@
+/* CSS para ocultar el botón de descarga */
+audio::-webkit-media-controls-enclosure {
+    overflow: hidden;
+}
+
+audio::-webkit-media-controls-panel {
+    width: calc(100% - 30px); /* Ajusta el tamaño del panel para ocultar el botón de descarga */
+}
+
+audio::-webkit-media-controls-download-button {
+    display: none;
+}
+
+audio::-webkit-media-controls-playback-rate-button {
+    display: none;
+}

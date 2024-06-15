@@ -1,35 +1,24 @@
-<footer class="footer mt-auto py-3 sticky-bottom container-fluid">
-  <div class="row p-5 bg-dark text-white">
-    
-    <div class="col-xs-12 col-md-6 col-lg-3">
-      <p class="h2">ULLMusic</p>
-      <p class="text-body-secondary">2023</p>
+<div class="row p-5 bg-dark text-white">
+  <div class="col-xs-12 col-md-6 col-lg-3">
+    <p class="h2">ULLMusic</p>
+    <p class="text-body-secondary">2023</p>
+  </div>
+  <div class="col-xs-12 col-md-6 col-lg-3">
+    <a href="#" class="h3">Novedades</a>
+  </div>
+  <div class="col-xs-12 col-md-6 col-lg-3">
+    <a href="#" class="h3">Listas</a>
+  </div>
+  <div class="col-xs-12 col-md-6 col-lg-3">
+    <p class="h3">Perfil</p>
+    <div *ngIf="!userLoginOn">
+      <a routerLink="/login" class="nav-link p-0 text-white">Iniciar sesión</a>
     </div>
-
-    <div class="col-xs-12 col-md-6 col-lg-3">
-      <a href="#" class="h3">Novedades</a>
+    <div *ngIf="!userLoginOn">
+      <a routerLink="/register" class="nav-link p-0 text-white">Registrarse</a>
     </div>
-
-    <div class="col-xs-12 col-md-6 col-lg-3">
-      <a href="#" class="h3">Listas</a>
-    </div>
-
-    <div class="col-xs-12 col-md-6 col-lg-3">
-      <p class="h3">Perfil</p>
-
-      <div *ngIf="!userLoginOn">
-        <a routerLink="/login" class="nav-link p-0 text-white">Iniciar sesión</a>
-      </div>
-
-      <div *ngIf="!userLoginOn">
-        <a routerLink="/register" class="nav-link p-0 text-white">Registrarse</a>
-      </div>
-
-      <div *ngIf="userLoginOn">
-        <a href="#" class="nav-link p-0 text-white">Cerrar sesión</a>
-      </div>
+    <div *ngIf="userLoginOn">
+      <a href="#" class="nav-link p-0 text-white">Cerrar sesión</a>
     </div>
   </div>
-</footer>
-
-
+</div>

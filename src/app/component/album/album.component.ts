@@ -12,25 +12,29 @@ import { Router } from '@angular/router';
 export class AlbumComponent {
 
   idAlb!: string;
+  album!: any;
+  currentPage = 1;
+  tracksPerPage = 10;
+
   constructor(private router: Router, private route: ActivatedRoute, private DataService: DataService){}
-  album!: {
-    idAlb: string;
-    artists: [{
-    idArt: string;
-    nameArt: string;
-    }];
-    nameAlb: string;
-    imageAlbUrl: string;
-    genresAlb: string;
-    popularityAlb: number;
-    releaseDate: Date;
-    tracks: [{
-      idTrack: string;
-      nameTrack: string;
-      previewUrl: string;
-      duration: Number;
-    }];
-  };
+
+  get paginatedTracks() {
+    const startIndex = (this.currentPage - 1) * this.tracksPerPage;
+    const endIndex = startIndex + this.tracksPerPage;
+    return this.album.tracks.slice(startIndex, endIndex);
+  }
+
+  get totalPages() {
+    return Math.ceil(this.album.tracks.length / this.tracksPerPage);
+  }
+
+  get pages() {
+    return Array.from({ length: this.totalPages }, (_, i) => i + 1);
+  }
+
+  changePage(page: number) {
+    this.currentPage = page;
+  }
 
   navArtist (idArt:string){
     this.router.navigate(['/artist/',idArt]);
@@ -45,6 +49,8 @@ export class AlbumComponent {
         this.DataService.getAlbum(this.idAlb).subscribe(
           (data) => {
             this.album = data;
+            console.log(this.album.artists);
+            console.log(this.album.tracks);
           }
         );
       }
