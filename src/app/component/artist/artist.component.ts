@@ -11,10 +11,19 @@ import { DataService } from 'src/app/servicies/back/data.service';
 export class ArtistComponent {
   idArt!: string;
   artist!: any;
-  currentPage = 1;
-  tracksPerPage = 10;
 
-  constructor(private route: ActivatedRoute, private router: Router, private DataService: DataService){}
+  readMore = false;
+
+  
+
+  constructor(private route: ActivatedRoute, private router: Router, private DataService: DataService) { }
+
+  //-----------------------------------------//
+  // Paginación de Tracks
+
+  currentPage = 1;
+  tracksPerPage = 10; 
+  playingIndex: number | null = null;
 
   get paginatedTracks() {
     const startIndex = (this.currentPage - 1) * this.tracksPerPage;
@@ -30,30 +39,100 @@ export class ArtistComponent {
     return Array.from({ length: this.totalPages }, (_, i) => i + 1);
   }
 
+  get paginationRange() {
+    const totalPages = this.totalPages;
+    const currentPage = this.currentPage;
+    const delta = 2;
+    const range = [];
+    const rangeWithDots = [];
+    let l;
+
+    range.push(1);
+    for (let i = currentPage - delta; i <= currentPage + delta; i++) {
+      if (i < totalPages && i > 1) {
+        range.push(i);
+      }
+    }
+    range.push(totalPages);
+
+    for (let i of range) {
+      if (l) {
+        if (i - l === 2) {
+          rangeWithDots.push(l + 1);
+        } else if (i - l !== 1) {
+          rangeWithDots.push('...');
+        }
+      }
+      rangeWithDots.push(i);
+      l = i;
+    }
+    return rangeWithDots;
+  }
+
   changePage(page: number) {
-    this.currentPage = page;
+    if (page >= 1 && page <= this.totalPages) {
+      this.currentPage = page;
+    }
   }
 
+  isNumber(value: any): value is number {
+    return typeof value === 'number';
+  }
+
+  //-----------------------------------------//
   // Metodo para navegar al componente Album
-  navAlbum (idAlb:string){
-    this.router.navigate(['/album/',idAlb]);
+  navAlbum(idAlb: string) {
+    this.router.navigate(['/album/', idAlb]);
   }
 
-  ngOnInit(): void{
+  readSummary(): void {
+    const contentDiv = document.getElementById('summary');
+    if (this.readMore == false) {
+      this.readMore = true;
+      if (contentDiv) {
+        contentDiv.innerHTML = this.artist.content;
+      }
+    } else {
+      this.readMore = false;
+      if (contentDiv) {
+        contentDiv.innerHTML = this.artist.summary;
+      }
+    }
+  }
+
+  ngOnInit(): void {
     this.route.params.subscribe(params => {
       this.idArt = params['idArt'];
       if (this.idArt) {
         this.DataService.getArtist(this.idArt).subscribe(
           (data) => {
             this.artist = data;
-            const contentDiv = document.getElementById('content');
-            if (contentDiv) {
-              contentDiv.innerHTML = this.artist.summary;
-            }
           }
         )
       }
+      const contentDiv = document.getElementById('summary');
+      if (contentDiv) {
+        contentDiv.innerHTML = this.artist.summary;
+      }
     });
+  }
+
+  // Reproductor de previews
+
+  togglePlayPause(audioPlayer: HTMLAudioElement, index: number) {
+    if (this.playingIndex === index) {
+      audioPlayer.pause();
+      this.playingIndex = null;
+    } else {
+      if (this.playingIndex !== null) {
+        const previousAudioPlayer = document.querySelector(`audio[data-index="${this.playingIndex}"]`) as HTMLAudioElement;
+        if (previousAudioPlayer) {
+          previousAudioPlayer.pause();
+        }
+      }
+      audioPlayer.play();
+      this.playingIndex = index;
+    }
   }
 
 }

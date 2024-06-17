@@ -1,25 +1,27 @@
 <div class="container" style="flex: 1;">
   <div class="row" style="background-color: lightgrey;">
-    <img src={{this.artist.imageArtUrl}} class="col-6">
-    <div class="col">
+    <img src={{this.artist.imageArtUrl}} class="col-12 col-md-6">
+    <div class="col-12 col-md-6">
       <h1 class="col" style="margin: 25px;">{{this.artist.nameArt}}</h1>
       <div class="row">
         <div *ngIf="this.artist.genresArt != '' ">
-          <h4 class="col-3">Generos:</h4>
+          <h2 class="col-3">Generos:</h2>
           <p class="col-3">{{this.artist.genresArt}}</p>
         </div>
       </div>
       <div class="row">
-        <h4 class="col-3"> Seguidores: </h4>
-        <p class="col-2">{{this.artist.followers}}</p>
+        <h2 class="col-12"> Seguidores: </h2>
+        <p class="col-12">{{this.artist.followers}}</p>
       </div>
     </div>
-    <div class="col-12" *ngIf="this.artist.content">
-      <h4>Biografía</h4>
+    <div class="col-12" *ngIf="this.artist.summary">
+      <h2>Biografía</h2>
     </div>
-    <div id="content" class="col-12">
+    <div id="summary" class="col-12">
       <!-- Biografía del artista -->
     </div>
+    <h5 class="col-12" *ngIf="readMore == false" (click)="readSummary()" >Leer más</h5>
+    <h5 class="col-12" *ngIf="readMore == true" (click)="readSummary()" >Leer menos</h5>
   </div>
   <div class="row align-items-center">
     <h2 class="col-12">Albumes</h2>
@@ -33,6 +35,9 @@
     </div>
   </div>
   <h2 class="col-12">Canciones populares</h2>
+
+  <!-- Tabla con los Tracks -->
+
   <table class="table">
     <thead>
       <tr>
@@ -52,10 +57,10 @@
         <ng-template #notNull>
           <td *ngIf="track.previewUrl.startsWith('https://') else notPreview">
 
-            <audio controls>
-              <source src={{track.previewUrl}} type="audio/mpeg">
-              Tu navegador no soporta el elemento de audio.
-            </audio>
+            <audio #audioPlayer [src]="track.previewUrl"></audio>
+            <button (click)="togglePlayPause(audioPlayer, i)">
+              <i [class]="playingIndex === i ? 'fas fa-pause' : 'fas fa-play'"></i>
+            </button>
 
           </td>
           <ng-template #notPreview>
@@ -68,6 +73,8 @@
       </tr>
     </tbody>
   </table>
+
+  <!-- Paginación de tracks -->
   <nav aria-label="Page navigation">
     <ul class="pagination">
       <li class="page-item" [class.disabled]="currentPage === 1">
@@ -75,8 +82,9 @@
           <span aria-hidden="true">&laquo;</span>
         </a>
       </li>
-      <li class="page-item" *ngFor="let page of pages" [class.active]="currentPage === page">
-        <a class="page-link" (click)="changePage(page)">{{page}}</a>
+      <li class="page-item" *ngFor="let page of paginationRange" [class.active]="currentPage === page" [class.disabled]="page === '...'">
+        <a class="page-link" *ngIf="isNumber(page)" (click)="changePage(page)">{{page}}</a>
+        <span class="page-link" *ngIf="!isNumber(page)">...</span>
       </li>
       <li class="page-item" [class.disabled]="currentPage === totalPages">
         <a class="page-link" (click)="changePage(currentPage + 1)" aria-label="Next">

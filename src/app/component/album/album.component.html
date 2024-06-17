@@ -1,7 +1,7 @@
 <div class="container">
   <div class="row" style="background-color: lightgrey;">
-    <img src={{this.album.imageAlbUrl}} class="col-6">
-    <div class="col-6">
+    <img src={{this.album.imageAlbUrl}} class="col-12 col-md-6">
+    <div class="col-12 col-md-6">
       <h1 class="col" style="margin: 25px;">{{this.album.nameAlb}}</h1>
       <div class="row">
         <h4 *ngIf="this.album.artists.length == 1" class="col-12">Artista:</h4>
@@ -33,10 +33,10 @@
         <ng-template #notNull>
           <td *ngIf="track.previewUrl.startsWith('https://') else notPreview">
 
-            <audio controls>
-              <source src={{track.previewUrl}} type="audio/mpeg">
-              Tu navegador no soporta el elemento de audio.
-            </audio>
+            <audio #audioPlayer [src]="track.previewUrl"></audio>
+            <button (click)="togglePlayPause(audioPlayer, i)">
+              <i [class]="playingIndex === i ? 'fas fa-pause' : 'fas fa-play'"></i>
+            </button>
 
           </td>
           <ng-template #notPreview>

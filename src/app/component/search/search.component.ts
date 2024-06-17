@@ -31,7 +31,6 @@ export class SearchComponent {
         this.DataService.getSearch(this.strSearch).subscribe(
           (data) => {
             this.search = data;
-            console.log(this.search.artists)
           }
         )
       }

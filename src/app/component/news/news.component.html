@@ -2,9 +2,9 @@
   <h1 style="margin: 25px;">Novedades</h1>
 
   
-  <div class="row align-items-center" >
+  <div class="row d-flex justify-content-center">
     <div *ngFor = "let album of albums" class="col">
-      <div class="card bg-dark text-white" style="width: 18rem; margin: 5px;" >
+      <div class="card bg-dark text-white" style="width: 18rem; margin: 5px; min-height: 500px;" >
         <img src={{album.imageAlbUrl}} class="card-img-top" (click)="navAlbum(album.idAlb)">
         <div class="card-body">
           <h5 class="card-title" (click)="navAlbum(album.idAlb)">{{album.nameAlb}}</h5>

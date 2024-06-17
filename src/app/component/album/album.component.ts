@@ -1,4 +1,4 @@
-import { Component } from '@angular/core';
+import { Component, AfterViewInit, ViewChild, ElementRef } from '@angular/core';
 import { DataService } from 'src/app/servicies/back/data.service';
 import { ActivatedRoute } from '@angular/router';
 import { Router } from '@angular/router';
@@ -15,6 +15,8 @@ export class AlbumComponent {
   album!: any;
   currentPage = 1;
   tracksPerPage = 10;
+
+  playingIndex: number | null = null;
 
   constructor(private router: Router, private route: ActivatedRoute, private DataService: DataService){}
 
@@ -39,6 +41,7 @@ export class AlbumComponent {
   navArtist (idArt:string){
     this.router.navigate(['/artist/',idArt]);
   }
+
   
   //----------------------------------------------------------------//
 
@@ -49,11 +52,36 @@ export class AlbumComponent {
         this.DataService.getAlbum(this.idAlb).subscribe(
           (data) => {
             this.album = data;
-            console.log(this.album.artists);
-            console.log(this.album.tracks);
           }
         );
       }
     });
   }
+
+
+  isPlaying = false;
+  audioPlayer!: HTMLAudioElement;
+
+  @ViewChild('audioPlayer') audioPlayerRef!: ElementRef<HTMLAudioElement>;
+
+  ngAfterViewInit() {
+    this.audioPlayer = this.audioPlayerRef.nativeElement;
+  }
+
+  togglePlayPause(audioPlayer: HTMLAudioElement, index: number) {
+    if (this.playingIndex === index) {
+      audioPlayer.pause();
+      this.playingIndex = null;
+    } else {
+      if (this.playingIndex !== null) {
+        const previousAudioPlayer = document.querySelector(`audio[data-index="${this.playingIndex}"]`) as HTMLAudioElement;
+        if (previousAudioPlayer) {
+          previousAudioPlayer.pause();
+        }
+      }
+      audioPlayer.play();
+      this.playingIndex = index;
+    }
+  }
+
 }
