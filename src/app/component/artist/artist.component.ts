@@ -2,6 +2,7 @@ import { Component } from '@angular/core';
 import { ActivatedRoute } from '@angular/router';
 import { Router } from '@angular/router';
 import { DataService } from 'src/app/servicies/back/data.service';
+import { AuthService } from 'src/app/servicies/auth/auth.service';
 
 @Component({
   selector: 'app-artist',
@@ -16,9 +17,9 @@ export class ArtistComponent {
 
   
 
-  constructor(private route: ActivatedRoute, private router: Router, private DataService: DataService) { }
+  constructor(private route: ActivatedRoute, private router: Router, private DataService: DataService, private AuthService:AuthService) { }
 
-  //-----------------------------------------//
+  //--------------------------------------------------------//
   // Paginación de Tracks
 
   currentPage = 1;
@@ -34,11 +35,7 @@ export class ArtistComponent {
   get totalPages() {
     return Math.ceil(this.artist.tracks.length / this.tracksPerPage);
   }
-
-  get pages() {
-    return Array.from({ length: this.totalPages }, (_, i) => i + 1);
-  }
-
+  
   get paginationRange() {
     const totalPages = this.totalPages;
     const currentPage = this.currentPage;
@@ -79,11 +76,25 @@ export class ArtistComponent {
     return typeof value === 'number';
   }
 
-  //-----------------------------------------//
-  // Metodo para navegar al componente Album
+  //--------------------------------------------------------//
+  // Likes
+
+  userLoginOn:boolean = false;
+  isRed: boolean = false;
+
+  toggleColor() {
+    this.isRed = !this.isRed; // Alterna entre true y false
+  }
+
+  //--------------------------------------------------------//
+  // Método para navegar al componente Album
+  
   navAlbum(idAlb: string) {
     this.router.navigate(['/album/', idAlb]);
   }
+
+  //--------------------------------------------------------//
+  // Método para insertar info de la biografía del artista
 
   readSummary(): void {
     const contentDiv = document.getElementById('summary');
@@ -100,7 +111,17 @@ export class ArtistComponent {
     }
   }
 
+  //--------------------------------------------------------//
+  // Método que se ejecuta al visualizar el componente, hace petición al Back-End
+
   ngOnInit(): void {
+
+    this.AuthService.currentUserLoginOn.subscribe({
+      next:(userLoginOn) => {
+        this.userLoginOn = userLoginOn
+      }
+    })
+
     this.route.params.subscribe(params => {
       this.idArt = params['idArt'];
       if (this.idArt) {
@@ -117,6 +138,7 @@ export class ArtistComponent {
     });
   }
 
+  //--------------------------------------------------------//
   // Reproductor de previews
 
   togglePlayPause(audioPlayer: HTMLAudioElement, index: number) {

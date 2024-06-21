@@ -20,8 +20,8 @@
     <div id="summary" class="col-12">
       <!-- Biografía del artista -->
     </div>
-    <h5 class="col-12" *ngIf="readMore == false" (click)="readSummary()" >Leer más</h5>
-    <h5 class="col-12" *ngIf="readMore == true" (click)="readSummary()" >Leer menos</h5>
+    <h5 class="col-12" *ngIf="readMore == false" (click)="readSummary()">Leer más</h5>
+    <h5 class="col-12" *ngIf="readMore == true" (click)="readSummary()">Leer menos</h5>
   </div>
   <div class="row align-items-center">
     <h2 class="col-12">Albumes</h2>
@@ -30,6 +30,11 @@
         <img src="{{album.imageAlbUrl}}" class="card-img-top" (click)="navAlbum(album.idAlb)">
         <div class="card-body">
           <h5 class="card-title" (click)="navAlbum(album.idAlb)"> {{album.nameAlb}} </h5>
+          <i *ngIf="userLoginOn" 
+            class="fa fa-heart" 
+            [ngClass]="{'red-heart': isRed}" 
+            style="font-size:30px; margin-left: 225px;" 
+            (click)="toggleColor()"></i>
         </div>
       </div>
     </div>
@@ -76,17 +81,18 @@
 
   <!-- Paginación de tracks -->
   <nav aria-label="Page navigation">
-    <ul class="pagination">
+    <ul class="pagination" style="min-width: 0px;">
       <li class="page-item" [class.disabled]="currentPage === 1">
         <a class="page-link" (click)="changePage(currentPage - 1)" aria-label="Previous">
           <span aria-hidden="true">&laquo;</span>
         </a>
       </li>
-      <li class="page-item" *ngFor="let page of paginationRange" [class.active]="currentPage === page" [class.disabled]="page === '...'">
+      <li class="page-item" style="min-width: 0px;" *ngFor="let page of paginationRange"
+        [class.active]="currentPage === page" [class.disabled]="page === '...'">
         <a class="page-link" *ngIf="isNumber(page)" (click)="changePage(page)">{{page}}</a>
         <span class="page-link" *ngIf="!isNumber(page)">...</span>
       </li>
-      <li class="page-item" [class.disabled]="currentPage === totalPages">
+      <li class="page-item" style="min-width: 0px;" [class.disabled]="currentPage === totalPages">
         <a class="page-link" (click)="changePage(currentPage + 1)" aria-label="Next">
           <span aria-hidden="true">&raquo;</span>
         </a>
