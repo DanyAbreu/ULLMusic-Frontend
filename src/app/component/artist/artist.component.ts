@@ -3,7 +3,7 @@ import { ActivatedRoute } from '@angular/router';
 import { Router } from '@angular/router';
 import { DataService } from 'src/app/servicies/back/data.service';
 import { AuthService } from 'src/app/servicies/auth/auth.service';
-import { Artist, Album, Track } from './artist.model';
+import { Artist } from './artist.model';
 
 @Component({
   selector: 'app-artist',

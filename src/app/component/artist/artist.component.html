@@ -3,11 +3,10 @@
     <img src={{this.artist.imageArtUrl}} class="col-12 col-md-6">
 
     <div class="col-12 col-md-6">
-      <h1 class="col" style="margin: 25px;">{{this.artist.nameArt}}</h1>
+      <h1 class="col">{{this.artist.nameArt}}</h1>
 
       <i *ngIf="userLoginOn" class="fa fa-heart col" [ngClass]="{'red-heart': this.artist.userLike}"
-        style="font-size:30px; margin-left: 25px;" (click)="userLikesArtist()"></i>
-
+        style="font-size:30px; margin: 25px;" (click)="userLikesArtist()"></i>
 
       <div class="row">
         <div *ngIf="this.artist.genresArt != '' ">
@@ -53,7 +52,7 @@
         <th scope="col"></th>
         <th scope="col">Canción</th>
         <th scope="col">Preview</th>
-        <th class="d-none d-md-block" scope="col">Duración</th>
+        <th scope="col" class="d-none d-md-block">Duración</th>
       </tr>
     </thead>
     <tbody>

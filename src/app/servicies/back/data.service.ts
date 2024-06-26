@@ -16,8 +16,11 @@ export class DataService {
     return this.http.get<any>(environment.BACK_URL+"news");
   }
 
-  getAlbum(idAlb:string): Observable<any> {
-    return this.http.get<any>(environment.BACK_URL+"album/"+idAlb);
+  getAlbum(idAlb:string, idUser: any): Observable<any> {
+    const params = new HttpParams()
+      .set('idAlb', idAlb)
+      .set('idUser', idUser);
+    return this.http.get<any>(environment.BACK_URL+"album", { params });
   }
 
   getArtist(idArt: string, idUser: any): Observable<any> {

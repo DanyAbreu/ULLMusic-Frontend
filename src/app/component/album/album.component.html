@@ -1,8 +1,13 @@
-<div class="container">
-  <div class="row" style="background-color: lightgrey;">
+<div class="container" style="flex: 1;">
+  <div class="row bg-dark text-white" style="margin-top: 25px;">
     <img src={{this.album.imageAlbUrl}} class="col-12 col-md-6">
+
     <div class="col-12 col-md-6">
-      <h1 class="col" style="margin: 25px;">{{this.album.nameAlb}}</h1>
+      <h1 class="col" >{{this.album.nameAlb}}</h1>
+
+      <i *ngIf="userLoginOn" class="fa fa-heart col" [ngClass]="{'red-heart': this.album.userLike}"
+        style="font-size:30px; margin: 25px;" (click)="userLikesAlbum()"></i>
+
       <div class="row">
         <h4 *ngIf="this.album.artists.length == 1" class="col-12">Artista:</h4>
         <h4 *ngIf="this.album.artists.length >  1" class="col-12">Artistas:</h4>
@@ -14,19 +19,33 @@
       </div>
     </div>
   </div>
+
+  <!-- Tabla con los Tracks -->
+
   <table class="table">
     <thead>
       <tr>
         <th scope="col">#</th>
+        <th scope="col"></th>
         <th scope="col">Canción</th>
         <th scope="col">Preview</th>
-        <th scope="col">Duración</th>
+        <th scope="col" class="d-none d-md-block">Duración</th>
       </tr>
     </thead>
     <tbody>
       <tr *ngFor="let track of paginatedTracks; let i = index" scope="row">
-        <th scope="row">{{(currentPage - 1) * tracksPerPage + i + 1}}</th>
-        <td>{{track.nameTrack}}</td>
+
+        <th scope="row">
+          {{(currentPage - 1) * tracksPerPage + i + 1}}
+        </th>
+        <td>
+          <i *ngIf="userLoginOn" class="fa fa-heart col" [ngClass]="{'red-heart': track.userLike}" style="font-size:30px;"
+            (click)="userlikesTrack(track.idTrack, track.userLike)">
+          </i>
+        </td>
+        <td>
+          {{track.nameTrack}}
+        </td>
         <td *ngIf="track.previewUrl == null else notNull">
           <p>No disponible</p>
         </td>
@@ -45,7 +64,9 @@
             </td>
           </ng-template>
         </ng-template>
-        <td>{{track.duration}}</td>
+        <td class="d-none d-md-block">
+          {{track.duration}}
+        </td>
       </tr>
     </tbody>
   </table>
