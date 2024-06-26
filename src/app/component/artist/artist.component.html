@@ -1,8 +1,14 @@
 <div class="container" style="flex: 1;">
-  <div class="row" style="background-color: lightgrey;">
+  <div class="row bg-dark text-white" style="margin-top: 25px;">
     <img src={{this.artist.imageArtUrl}} class="col-12 col-md-6">
+
     <div class="col-12 col-md-6">
       <h1 class="col" style="margin: 25px;">{{this.artist.nameArt}}</h1>
+
+      <i *ngIf="userLoginOn" class="fa fa-heart col" [ngClass]="{'red-heart': this.artist.userLike}"
+        style="font-size:30px; margin-left: 25px;" (click)="userLikesArtist()"></i>
+
+
       <div class="row">
         <div *ngIf="this.artist.genresArt != '' ">
           <h2 class="col-3">Generos:</h2>
@@ -30,11 +36,8 @@
         <img src="{{album.imageAlbUrl}}" class="card-img-top" (click)="navAlbum(album.idAlb)">
         <div class="card-body">
           <h5 class="card-title" (click)="navAlbum(album.idAlb)"> {{album.nameAlb}} </h5>
-          <i *ngIf="userLoginOn" 
-            class="fa fa-heart" 
-            [ngClass]="{'red-heart': isRed}" 
-            style="font-size:30px; margin-left: 225px;" 
-            (click)="toggleColor()"></i>
+          <i *ngIf="userLoginOn" class="fa fa-heart" [ngClass]="{'red-heart': album.userLike}"
+            style="font-size:30px; margin-left: 225px;" (click)="userlikesAlb(album.idAlb)"></i>
         </div>
       </div>
     </div>
@@ -47,15 +50,26 @@
     <thead>
       <tr>
         <th scope="col">#</th>
+        <th scope="col"></th>
         <th scope="col">Canción</th>
         <th scope="col">Preview</th>
-        <th scope="col">Duración</th>
+        <th class="d-none d-md-block" scope="col">Duración</th>
       </tr>
     </thead>
     <tbody>
       <tr *ngFor="let track of paginatedTracks; let i = index" scope="row">
-        <th scope="row">{{(currentPage - 1) * tracksPerPage + i + 1}}</th>
-        <td>{{track.nameTrack}}</td>
+
+        <th scope="row">
+          {{(currentPage - 1) * tracksPerPage + i + 1}}
+        </th>
+        <td>
+          <i *ngIf="userLoginOn" class="fa fa-heart col" [ngClass]="{'red-heart': track.userLike}" style="font-size:30px;"
+            (click)="userlikesTrack(track.idTrack, track.userLike)">
+          </i>
+        </td>
+        <td>
+          {{track.nameTrack}}
+        </td>
         <td *ngIf="track.previewUrl == null else notNull">
           <p>No disponible</p>
         </td>
@@ -74,7 +88,9 @@
             </td>
           </ng-template>
         </ng-template>
-        <td>{{track.duration}}</td>
+        <td class="d-none d-md-block">
+          {{track.duration}}
+        </td>
       </tr>
     </tbody>
   </table>

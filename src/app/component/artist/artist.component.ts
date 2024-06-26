@@ -3,6 +3,7 @@ import { ActivatedRoute } from '@angular/router';
 import { Router } from '@angular/router';
 import { DataService } from 'src/app/servicies/back/data.service';
 import { AuthService } from 'src/app/servicies/auth/auth.service';
+import { Artist, Album, Track } from './artist.model';
 
 @Component({
   selector: 'app-artist',
@@ -11,11 +12,9 @@ import { AuthService } from 'src/app/servicies/auth/auth.service';
 })
 export class ArtistComponent {
   idArt!: string;
-  artist!: any;
+  artist!: Artist;
 
   readMore = false;
-
-  
 
   constructor(private route: ActivatedRoute, private router: Router, private DataService: DataService, private AuthService:AuthService) { }
 
@@ -77,13 +76,52 @@ export class ArtistComponent {
   }
 
   //--------------------------------------------------------//
-  // Likes
+  // Métodos para gestionar Users Likes
 
+  idUser:number = 0;
   userLoginOn:boolean = false;
-  isRed: boolean = false;
 
-  toggleColor() {
-    this.isRed = !this.isRed; // Alterna entre true y false
+  userLikesArtist() {
+    this.route.params.subscribe(params => {
+      this.idArt = params['idArt'];
+      if (this.idArt) {
+        this.DataService.userLikesArtist(this.idArt, this.idUser).subscribe(
+          (data) => {
+            this.artist.userLike = data;
+          }
+        )
+      }
+    });
+  }
+
+  findAlbumById(idAlb: string){
+    return this.artist.albums.find(album => album.idAlb === idAlb)
+  }
+
+  userlikesAlb(idAlb: string) {
+    const album = this.findAlbumById(idAlb);
+    this.DataService.userLikesAlbum(idAlb, this.idUser). subscribe(
+      (data) => {
+        if (album) {
+          album.userLike = data;
+        }
+      }
+    )
+  }
+
+  findTrackById(idTrack: string){
+    return this.artist.tracks.find(track => track.idTrack === idTrack)
+  }
+
+  userlikesTrack(idTrack:string, userLike: boolean) {
+    const track = this.findTrackById(idTrack);
+    this.DataService.userLikesTrack(idTrack, this.idUser). subscribe(
+      (data) => {
+        if (track) {
+          track.userLike = data;
+        }
+      }
+    )
   }
 
   //--------------------------------------------------------//
@@ -115,17 +153,25 @@ export class ArtistComponent {
   // Método que se ejecuta al visualizar el componente, hace petición al Back-End
 
   ngOnInit(): void {
-
+    // Comprueba si el usuario está logeado
     this.AuthService.currentUserLoginOn.subscribe({
       next:(userLoginOn) => {
-        this.userLoginOn = userLoginOn
+        this.userLoginOn = userLoginOn;
       }
     })
-
+    // obtiene el ID del usuario
+    if (this.userLoginOn) {
+      this.AuthService.userData.subscribe({
+        next:(userData) => {
+          this.idUser = userData.id;
+        }
+      })
+    }
+    // Obtiene los datos del artista
     this.route.params.subscribe(params => {
       this.idArt = params['idArt'];
       if (this.idArt) {
-        this.DataService.getArtist(this.idArt).subscribe(
+        this.DataService.getArtist(this.idArt, this.idUser).subscribe(
           (data) => {
             this.artist = data;
           }
