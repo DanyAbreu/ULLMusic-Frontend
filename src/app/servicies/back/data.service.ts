@@ -51,6 +51,12 @@ export class DataService {
       return this.http.get<any>(`${environment.BACK_URL}userLikesTrack`, { params });
   }
 
+  getUserLikes(idUser: any): Observable<any> {
+    const params = new HttpParams()
+      .set('idUser', idUser);
+      return this.http.get<any>(`${environment.BACK_URL}getUserLikes`, { params })
+  }
+
 getSearch(strSearch:string): Observable<any> {
     return this.http.get<any>(environment.BACK_URL+"search/"+strSearch);
   }

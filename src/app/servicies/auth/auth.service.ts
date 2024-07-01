@@ -23,17 +23,13 @@ export class AuthService {
   get userLoginOn(): Observable<boolean>{
     return this.currentUserLoginOn.asObservable()
   }
-
-  //metodo para comunicarse con el backend
+  
   login(credentials:LoginRequest):Observable<UserResponse>{
     return this.http.post<UserResponse>(environment.BACK_URL+'auth/login',credentials).pipe(
       tap( (userData: UserResponse) => {
         this.currentUserData.next(userData)
         this.currentUserLoginOn.next(true)
       }),
-      // map((user: UserResponse) =>{
-      //   this.
-      // }),
       catchError(this.handleError)
     )
   }
@@ -44,14 +40,9 @@ export class AuthService {
         this.currentUserData.next(userData)
         this.currentUserLoginOn.next(true)
       }),
-      // map((user: UserResponse) =>{
-      //   this.
-      // }),
       catchError(this.handleError)
     )
   }
-
-  private checkToken(): void{}
 
   private handleError(error:HttpErrorResponse){
     if(error.status===0){

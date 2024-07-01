@@ -1,0 +1,30 @@
+<div class="container">
+    <div class="row bg-dark text-white" style="margin: 25px;">
+        <h1 class="col-12"> Bienvenido a UllMusic: {{this.user.username}} </h1>
+
+        <div class="row align-items-center">
+            <h3 class="col-12"> Artistas que te gustan: </h3>
+            <div *ngFor=" let artist of this.userLikes.artists" class="col">
+                <div class="card bg-light text-black" style="width: 18rem; margin: 5px;">
+                    <img src="{{artist.imageArtUrl}}" class="card-img-top" (click)="navArtist(artist.idArt)">
+                    <div class="card-body">
+                        <h5 class="card-title text-dark" (click)="navArtist(artist.idArt)"> {{artist.nameArt}} </h5>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <div class="row align-items-center">
+            <h3 class="col-12"> Álbumes que te gustan: </h3>
+            <div *ngFor=" let album of this.userLikes.albums" class="col">
+                <div class="card bg-light text-black" style="width: 18rem; margin: 5px;">
+                    <img src="{{album.imageAlbUrl}}" class="card-img-top" (click)="navAlbum(album.idAlb)">
+                    <div class="card-body">
+                        <h5 class="card-title text-dark" (click)="navArtist(album.idAlb)"> {{album.nameAlb}} </h5>
+                    </div>
+                </div>
+            </div>
+        </div>
+        
+    </div>
+</div>

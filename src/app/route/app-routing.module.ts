@@ -6,6 +6,7 @@ import { RegisterComponent } from '../component/auth/register/register.component
 import { AlbumComponent } from '../component/album/album.component';
 import { ArtistComponent } from '../component/artist/artist.component';
 import { SearchComponent } from '../component/search/search.component';
+import { UserComponent } from '../component/auth/user/user.component';
 
 const routes: Routes = [
   {path:'',redirectTo:'/inicio', pathMatch:'full'},
@@ -14,7 +15,8 @@ const routes: Routes = [
   { path: 'register', component: RegisterComponent },
   { path: 'album/:idAlb', component: AlbumComponent },
   { path: 'artist/:idArt', component: ArtistComponent },
-  { path: 'search/:strSearch', component: SearchComponent }
+  { path: 'search/:strSearch', component: SearchComponent },
+  { path: 'user', component: UserComponent}
 ];
 
 @NgModule({

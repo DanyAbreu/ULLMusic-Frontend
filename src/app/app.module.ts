@@ -13,6 +13,7 @@ import { HttpClientModule } from '@angular/common/http';
 import { AlbumComponent } from './component/album/album.component';
 import { ArtistComponent } from './component/artist/artist.component';
 import { SearchComponent } from './component/search/search.component';
+import { UserComponent } from './component/auth/user/user.component';
 
 @NgModule({
   declarations: [
@@ -24,7 +25,8 @@ import { SearchComponent } from './component/search/search.component';
     RegisterComponent,
     AlbumComponent,
     ArtistComponent,
-    SearchComponent
+    SearchComponent,
+    UserComponent
   ],
   imports: [
     BrowserModule,
