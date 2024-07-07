@@ -16,6 +16,7 @@ export class NewsComponent {
     imageAlbUrl: string; 
     nameAlb: string; 
     artists: [any]; }];
+  isLoading = false;
 
   // Metodo para navegar al componente Album
   navAlbum (idAlb:string){
@@ -38,6 +39,7 @@ export class NewsComponent {
           }
           
         });
+        this.isLoading = true;
       },
       (error) => {
         console.error('Error al obtener nuevos albunes', error);

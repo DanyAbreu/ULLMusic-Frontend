@@ -17,7 +17,7 @@
           <p *ngIf="!userLoginOn" class="dropdown-item" (click)="navComponent('login')">Iniciar sesión</p>
           <p *ngIf="!userLoginOn" class="dropdown-item" (click)="navComponent('register')">Registrarse</p>
           <p *ngIf="userLoginOn" class="dropdown-item"  (click)="navComponent('user')">Perfil de usuario</p>
-          <p *ngIf="userLoginOn" class="dropdown-item" href="#">Cerrar sesión</p>
+          <a *ngIf="userLoginOn" class="dropdown-item" href="#">Cerrar sesión</a>
         </div>
       </li>
     </ul>

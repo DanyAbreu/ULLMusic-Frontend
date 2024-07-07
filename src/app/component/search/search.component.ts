@@ -13,6 +13,7 @@ export class SearchComponent {
 
   strSearch!: string;
   search!: any;
+  isLoading = false;
 
   constructor(private route: ActivatedRoute, private DataService: DataService, private router: Router){}
 
@@ -31,6 +32,7 @@ export class SearchComponent {
         this.DataService.getSearch(this.strSearch).subscribe(
           (data) => {
             this.search = data;
+            this.isLoading = true;
           }
         )
       }

@@ -15,6 +15,7 @@ export class AlbumComponent {
 
   idAlb!: string;
   album!: Album;
+  isLoading: boolean = false;
   currentPage = 1;
   tracksPerPage = 10;
 
@@ -101,6 +102,7 @@ export class AlbumComponent {
         this.DataService.getAlbum(this.idAlb, this.idUser).subscribe(
           (data) => {
             this.album = data;
+            this.isLoading = true;
           }
         );
       }

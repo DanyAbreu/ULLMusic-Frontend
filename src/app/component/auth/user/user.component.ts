@@ -13,6 +13,7 @@ export class UserComponent {
 
   constructor(private AuthService:AuthService, private DataService: DataService ,private router: Router){}
 
+  isLoading = false;
   userLoginOn!: boolean;
   user!: any;
   userLikes!: any;
@@ -34,6 +35,7 @@ export class UserComponent {
       this.DataService.getUserLikes(this.user.id).subscribe(
         (data) => {
           this.userLikes = data;
+          this.isLoading = true;
         }
       )
 

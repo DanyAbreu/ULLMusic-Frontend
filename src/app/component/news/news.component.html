@@ -1,4 +1,6 @@
-<div class="container text-center">  
+<app-wait *ngIf="!isLoading"></app-wait>
+
+<div *ngIf="isLoading" class="container text-center">  
   <h1 style="margin: 25px;">Novedades</h1>
 
   

@@ -1,4 +1,6 @@
-<div class="container" style="flex: 1;">
+<app-wait *ngIf="!isLoading"></app-wait>
+
+<div *ngIf="isLoading" class="container" style="flex: 1;">
   <div class="row bg-dark text-white" style="margin-top: 25px;">
     <img src={{this.album.imageAlbUrl}} class="col-12 col-md-6">
 

@@ -1,4 +1,6 @@
-<div class="container">
+<app-wait *ngIf="!isLoading"></app-wait>
+
+<div *ngIf="isLoading" class="container">
 <!-- If (no hay resultados) -->
 <h1 *ngIf="this.search.artists.length == 0 && this.search.albums.length == 0 && this.search.tracks.length == 0 else notEmpty">
     No se encontraron resultados para "{{this.strSearch}}"

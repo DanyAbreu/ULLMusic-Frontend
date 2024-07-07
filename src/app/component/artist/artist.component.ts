@@ -13,6 +13,7 @@ import { Artist } from './artist.model';
 export class ArtistComponent {
   idArt!: string;
   artist!: Artist;
+  isLoading: boolean = false;
 
   readMore = false;
 
@@ -174,6 +175,7 @@ export class ArtistComponent {
         this.DataService.getArtist(this.idArt, this.idUser).subscribe(
           (data) => {
             this.artist = data;
+            this.isLoading = true;
           }
         )
       }
