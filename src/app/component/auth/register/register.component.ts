@@ -25,7 +25,7 @@ export class RegisterComponent {
     if(this.registerForm.valid){
       this.AuthService.register(this.registerForm.value as RegisterRequest).subscribe({
         next(userData) {
-          console.log(userData)
+          console.log(userData.username)
         },
         error: (errorData) => {
           console.log(errorData)

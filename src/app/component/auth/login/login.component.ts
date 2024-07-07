@@ -24,7 +24,7 @@ export class LoginComponent {
     if(this.loginForm.valid){
       this.AuthService.login(this.loginForm.value as LoginRequest).subscribe({
         next(userData) {
-          console.log(userData)
+          console.log(userData.username)
         },
         error: (errorData) => {
           console.log(errorData)

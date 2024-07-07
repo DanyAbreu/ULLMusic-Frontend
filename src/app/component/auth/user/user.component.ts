@@ -33,7 +33,6 @@ export class UserComponent {
 
       this.DataService.getUserLikes(this.user.id).subscribe(
         (data) => {
-          console.log(data)
           this.userLikes = data;
         }
       )

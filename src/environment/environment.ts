@@ -1,4 +1,4 @@
 export const environment = {
     production: false,
-    BACK_URL: 'https://ullmusic-backend.vercel.app/'
+    BACK_URL: 'http://localhost:4000/'
 }
