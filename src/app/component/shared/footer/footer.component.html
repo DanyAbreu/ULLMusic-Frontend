@@ -1,14 +1,8 @@
 <div class="row p-5 bg-dark text-white" style="width: 100%;">
   <div class="col-xs-12 col-md-6 col-lg-3">
-    <p class="h2">ULLMusic</p>
+    <p class="h2" (click)="navComponent('inicio')">ULLMusic</p>
     <p class="text-body-secondary">2023</p>
-  </div>
-  <div class="col-xs-12 col-md-6 col-lg-3">
-    <a href="#" class="h3">Novedades</a>
-  </div>
-  <div class="col-xs-12 col-md-6 col-lg-3">
-    <a href="#" class="h3">Listas</a>
-  </div>
+  </div> 
   <div class="col-xs-12 col-md-6 col-lg-3">
     <p class="h3">Perfil</p>
     <div *ngIf="!userLoginOn">

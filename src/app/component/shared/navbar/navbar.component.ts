@@ -8,33 +8,37 @@ import { Router } from '@angular/router';
   templateUrl: './navbar.component.html',
   styleUrls: ['./navbar.component.css']
 })
-export class NavbarComponent implements OnInit, OnDestroy{
-  userLoginOn:boolean = false
+export class NavbarComponent implements OnInit, OnDestroy {
+  userLoginOn: boolean = false
+  userData: any;
   // userData?:User
-  constructor( private router: Router, private AuthService:AuthService){}
+  constructor(private router: Router, private AuthService: AuthService) { }
 
-  navSearch(strSearch: any){
-    this.router.navigate(['/search/',strSearch]);
+
+  navComponent(strUrl: string) {
+    this.router.navigate(['/' + strUrl])
   }
+
+  navSearch(strSearch: string) {
+    this.router.navigate(['/search/', strSearch]);
+  }
+
+  onSubmit(event: Event, searchStr: string) {
+    event.preventDefault();
+    this.navSearch(searchStr);
+  }
+
 
   ngOnDestroy(): void {
     this.AuthService.currentUserData.unsubscribe()
     this.AuthService.currentUserLoginOn.unsubscribe()
   }
 
-  ngOnInit(): void{
+  ngOnInit(): void {
     this.AuthService.currentUserLoginOn.subscribe({
-      next:(userLoginOn) => {
+      next: (userLoginOn) => {
         this.userLoginOn = userLoginOn
       }
     })
-
-    
-
-    // this.AuthService.currentUserData.subscribe({
-    //   next:(userData)=>{
-    //     this.userData=userData
-    //   }
-    // })
   }
 }

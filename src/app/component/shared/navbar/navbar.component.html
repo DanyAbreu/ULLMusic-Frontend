@@ -1,5 +1,6 @@
 <nav class="navbarComponent navbar navbar-expand-lg navbar-dark bg-dark" >
-  <a class="navbar-brand" href="#">ULLMusic</a>
+  <!-- <a class="navbar-brand" href="#">ULLMusic</a> -->
+  <h1 class="navbar-brand" style="cursor: pointer;" (click)="navComponent('inicio')">ULLMusic</h1>
   <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent"
     aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
     <span class="navbar-toggler-icon"></span>
@@ -7,27 +8,22 @@
 
   <div class="collapse navbar-collapse" id="navbarSupportedContent">
     <ul class="navbar-nav mr-auto">
-      <li class="nav-item active">
-        <a class="nav-link" routerLink="/news">Nodevades</a> <!-- Arreglar -->
-      </li>
-      <li class="nav-item">
-        <a class="nav-link" routerLink="/login">Listas</a> <!-- Arreglar -->
-      </li>
-      <li class="nav-item dropdown">
-        <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button" data-toggle="dropdown"
+      <li class="nav-item dropdown" style="padding-top: 10px;">
+        <p class="nav-link dropdown-toggle" id="navbarDropdown" role="button" data-toggle="dropdown"
           aria-haspopup="true" aria-expanded="false">
           Perfil
-        </a> <!-- Arreglar -->
+      </p>
         <div class="dropdown-menu" aria-labelledby="navbarDropdown">
-          <a *ngIf="!userLoginOn" class="dropdown-item" routerLink="/login">Iniciar sesión</a>
-          <a *ngIf="!userLoginOn" class="dropdown-item" routerLink="/register">Registrarse</a>
-          <a *ngIf="userLoginOn" class="dropdown-item" href="#">Cerrar sesión</a>
+          <p *ngIf="!userLoginOn" class="dropdown-item" (click)="navComponent('login')">Iniciar sesión</p>
+          <p *ngIf="!userLoginOn" class="dropdown-item" (click)="navComponent('register')">Registrarse</p>
+          <p *ngIf="userLoginOn" class="dropdown-item"  (click)="navComponent('user')">Perfil de usuario</p>
+          <p *ngIf="userLoginOn" class="dropdown-item" href="#">Cerrar sesión</p>
         </div>
       </li>
     </ul>
-    <form class="form-inline my-2 my-lg-0">
+    <form class="form-inline my-2 my-lg-0" (submit)="onSubmit($event, searchStr.value)">
       <input #searchStr class="form-control mr-sm-2" type="search" placeholder="artista, album, etc..." aria-label="Search">
-      <button class="btn btn-outline-success my-2 my-sm-0" type="submit" (click)="navSearch(searchStr.value)" >Buscar</button> <!-- Arreglar -->
-    </form>
+      <button class="btn btn-outline-success my-2 my-sm-0" type="submit">Buscar</button>
+    </form>    
   </div>
 </nav>

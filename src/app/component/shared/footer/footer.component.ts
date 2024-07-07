@@ -1,5 +1,7 @@
 import { Component, OnDestroy, OnInit } from '@angular/core';
 import { AuthService } from 'src/app/servicies/auth/auth.service';
+import { Router } from '@angular/router';
+
 
 
 @Component({
@@ -9,11 +11,15 @@ import { AuthService } from 'src/app/servicies/auth/auth.service';
 })
 export class FooterComponent implements OnInit, OnDestroy{
   userLoginOn:boolean = false;
-  constructor(private AuthService:AuthService){}
+  constructor(  private router: Router, private AuthService:AuthService){}
 
   ngOnDestroy(): void {
     this.AuthService.currentUserData.unsubscribe()
     this.AuthService.currentUserLoginOn.unsubscribe()
+  }
+
+  navComponent(strUrl: string){
+    this.router.navigate(['/'+strUrl])
   }
 
   ngOnInit(): void{
