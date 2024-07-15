@@ -27,16 +27,16 @@
     <div id="summary" class="col-12">
       <!-- Biografía del artista -->
     </div>
-    <h5 class="col-12" *ngIf="readMore == false" (click)="readSummary()">Leer más</h5>
-    <h5 class="col-12" *ngIf="readMore == true" (click)="readSummary()">Leer menos</h5>
+    <h5 class="col-12" style="cursor: pointer;" *ngIf="readMore == false" (click)="readSummary()">Leer más</h5>
+    <h5 class="col-12" style="cursor: pointer;" *ngIf="readMore == true" (click)="readSummary()">Leer menos</h5>
   </div>
   <div class="row align-items-center">
     <h2 class="col-12">Albumes</h2>
     <div *ngFor="let album of artist.albums" class="col">
       <div class="card bg-dark text-white" style="width: 18rem; margin: 5px;">
-        <img src="{{album.imageAlbUrl}}" class="card-img-top" (click)="navAlbum(album.idAlb)">
+        <img src="{{album.imageAlbUrl}}" style="cursor: pointer;" class="card-img-top" (click)="navAlbum(album.idAlb)">
         <div class="card-body">
-          <h5 class="card-title" (click)="navAlbum(album.idAlb)"> {{album.nameAlb}} </h5>
+          <h5 class="card-title" style="cursor: pointer;" (click)="navAlbum(album.idAlb)"> {{album.nameAlb}} </h5>
           <i *ngIf="userLoginOn" class="fa fa-heart" [ngClass]="{'red-heart': album.userLike}"
             style="font-size:30px; margin-left: 225px;" (click)="userlikesAlb(album.idAlb)"></i>
         </div>

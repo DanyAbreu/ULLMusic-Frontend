@@ -1,5 +1,4 @@
 <nav class="navbarComponent navbar navbar-expand-lg navbar-dark bg-dark" >
-  <!-- <a class="navbar-brand" href="#">ULLMusic</a> -->
   <h1 class="navbar-brand" style="cursor: pointer;" (click)="navComponent('inicio')">ULLMusic</h1>
   <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent"
     aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
@@ -14,9 +13,9 @@
           Perfil
       </p>
         <div class="dropdown-menu" aria-labelledby="navbarDropdown">
-          <p *ngIf="!userLoginOn" class="dropdown-item" (click)="navComponent('login')">Iniciar sesión</p>
-          <p *ngIf="!userLoginOn" class="dropdown-item" (click)="navComponent('register')">Registrarse</p>
-          <p *ngIf="userLoginOn" class="dropdown-item"  (click)="navComponent('user')">Perfil de usuario</p>
+          <p *ngIf="!userLoginOn" class="dropdown-item" style="cursor: pointer;" (click)="navComponent('login')">Iniciar sesión</p>
+          <p *ngIf="!userLoginOn" class="dropdown-item" style="cursor: pointer;" (click)="navComponent('register')">Registrarse</p>
+          <p *ngIf="userLoginOn" class="dropdown-item" style="cursor: pointer;" (click)="navComponent('user')">Perfil de usuario</p>
           <a *ngIf="userLoginOn" class="dropdown-item" href="#">Cerrar sesión</a>
         </div>
       </li>

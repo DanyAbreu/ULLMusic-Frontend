@@ -13,9 +13,9 @@
         <h2 class="col-12">Artistas:</h2>
         <div *ngFor="let artist of this.search.artists" class="col">
             <div class="card bg-dark text-white" style="width: 18rem; margin: 5px;" > 
-                <img src="{{artist.imageArtUrl}}" class="card-img-top" (click)="navArtist(artist.idArt)">
+                <img src="{{artist.imageArtUrl}}" class="card-img-top" style="cursor: pointer;" (click)="navArtist(artist.idArt)">
                 <div class="card-body">
-                    <h5 class="card-title" (click)="navArtist(artist.idArt)"> {{artist.nameArt}} </h5>
+                    <h5 class="card-title" style="cursor: pointer;" (click)="navArtist(artist.idArt)"> {{artist.nameArt}} </h5>
                 </div>
             </div>
         </div>
@@ -25,9 +25,9 @@
         <h2 class="col-12">Albumes:</h2>
         <div *ngFor="let album of this.search.albums" class="col">
             <div class="card bg-dark text-white" style="width: 18rem; margin: 5px;" > 
-                <img src="{{album.imageAlbUrl}}" class="card-img-top" (click)="navArtist(album.idAlb)">
+                <img src="{{album.imageAlbUrl}}" class="card-img-top" style="cursor: pointer;" (click)="navAlbum(album.idAlb)">
                 <div class="card-body">
-                    <h5 class="card-title" (click)="navAlbum(album.idAlb)"> {{album.nameAlb}} </h5>
+                    <h5 class="card-title" style="cursor: pointer;" (click)="navAlbum(album.idAlb)"> {{album.nameAlb}} </h5>
                 </div>
             </div>
         </div>

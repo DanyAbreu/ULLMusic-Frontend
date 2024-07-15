@@ -1,4 +1,4 @@
-import { Component, Renderer2 } from '@angular/core';
+import { Component } from '@angular/core';
 import { DataService } from "src/app/servicies/back/data.service";
 import { Router } from '@angular/router';
 @Component({
@@ -9,7 +9,7 @@ import { Router } from '@angular/router';
 
 export class NewsComponent {
 
-  constructor(private DataService: DataService, private router: Router, private renderer: Renderer2){}
+  constructor(private DataService: DataService, private router: Router){}
 
   albums!: [{ 
     idAlb: string; 

@@ -7,12 +7,12 @@
   <div class="row d-flex justify-content-center">
     <div *ngFor = "let album of albums" class="col">
       <div class="card bg-dark text-white" style="width: 18rem; margin: 5px; min-height: 500px;" >
-        <img src={{album.imageAlbUrl}} class="card-img-top" (click)="navAlbum(album.idAlb)">
+        <img src={{album.imageAlbUrl}} class="card-img-top" style="cursor: pointer;" (click)="navAlbum(album.idAlb)">
         <div class="card-body">
-          <h5 class="card-title" (click)="navAlbum(album.idAlb)">{{album.nameAlb}}</h5>
+          <h5 class="card-title" style="cursor: pointer;" (click)="navAlbum(album.idAlb)">{{album.nameAlb}}</h5>
           <h6>Artistas:</h6>
           <div *ngFor = "let artist of album.artists">
-            <p (click)="navArtist(artist.idArt)"> {{artist.nameArt}} </p>
+            <p style="cursor: pointer;" (click)="navArtist(artist.idArt)"> {{artist.nameArt}} </p>
           </div>
         </div>
       </div>

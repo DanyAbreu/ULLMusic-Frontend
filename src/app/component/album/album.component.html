@@ -14,7 +14,7 @@
         <h4 *ngIf="this.album.artists.length == 1" class="col-12">Artista:</h4>
         <h4 *ngIf="this.album.artists.length >  1" class="col-12">Artistas:</h4>
         <div *ngFor="let artist of this.album.artists">
-          <p (click)="navArtist(artist.idArt)" class="col">{{artist.nameArt}}</p>
+          <p (click)="navArtist(artist.idArt)" class="col" style="cursor: pointer;">{{artist.nameArt}}</p>
         </div>
         <h4 class="col-12">Fecha de lanzamiento: </h4>
         <p class="col-12">{{this.album.releaseDate}}</p>
